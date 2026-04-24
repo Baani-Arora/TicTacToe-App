@@ -16,7 +16,13 @@ public class TicTacToe {
         int slot = getUserInput();
         int[] pos = getBoardPosition(slot);
 
-        System.out.println("Row: " + pos[0] + ", Col: " + pos[1]);
+        if (isValidMove(pos[0], pos[1])) {
+            board[pos[0]][pos[1]] = human;
+        } else {
+            System.out.println("Invalid move");
+        }
+
+        printBoard();
     }
 
     static void initializeBoard() {
@@ -61,5 +67,9 @@ public class TicTacToe {
         int row = (slot - 1) / 3;
         int col = (slot - 1) % 3;
         return new int[]{row, col};
+    }
+
+    static boolean isValidMove(int row, int col) {
+        return board[row][col] == '-';
     }
 }
