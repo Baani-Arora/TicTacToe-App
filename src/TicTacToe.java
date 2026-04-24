@@ -13,7 +13,10 @@ public class TicTacToe {
         toss();
         printBoard();
 
-        int slot = getUserInput();  // UC3 only
+        int slot = getUserInput();
+        int[] pos = getBoardPosition(slot);
+
+        System.out.println("Row: " + pos[0] + ", Col: " + pos[1]);
     }
 
     static void initializeBoard() {
@@ -26,9 +29,9 @@ public class TicTacToe {
 
     static void printBoard() {
         for (int i = 0; i < 3; i++) {
-            System.out.print(board[i][0] + " ");
-            System.out.print(board[i][1] + " ");
-            System.out.print(board[i][2] + " ");
+            for (int j = 0; j < 3; j++) {
+                System.out.print(board[i][j] + " ");
+            }
             System.out.println();
         }
     }
@@ -48,10 +51,15 @@ public class TicTacToe {
         }
     }
 
-    // ✅ UC3 METHOD
     static int getUserInput() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter slot (1-9): ");
         return sc.nextInt();
+    }
+
+    static int[] getBoardPosition(int slot) {
+        int row = (slot - 1) / 3;
+        int col = (slot - 1) % 3;
+        return new int[]{row, col};
     }
 }
